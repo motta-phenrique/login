@@ -1,21 +1,12 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 {% load allauth account %}
-{% load static %}
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
-
-{% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/tailwind.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
     {% element h1 %}
-
-    <h1 class="">Sign In</h1>
-
-        {% trans "Sign In" %}
+        {% trans "Login" %}
     {% endelement %}
     {% if not SOCIALACCOUNT_ONLY %}
         {% setvar link %}
@@ -24,9 +15,8 @@
             {% setvar end_link %}
             </a>
         {% endsetvar %}
-        
         {% element p %}
-            {% blocktranslate %}If you have created an account yet, then please {{ link }}sign up{{ end_link }} first.{% endblocktranslate %}
+            {% blocktranslate %}Se você não tem uma conta, crie agora: {{ link }}Cadastre-se.{{ end_link }}{% endblocktranslate %}
         {% endelement %}
         {% url 'account_login' as login_url %}
         {% element form form=form method="post" action=login_url tags="entrance,login" %}
@@ -38,7 +28,7 @@
             {% endslot %}
             {% slot actions %}
                 {% element button type="submit" tags="prominent,login" %}
-                    {% trans "Sign In" %}
+                    {% trans "Entrar" %}
                 {% endelement %}
             {% endslot %}
         {% endelement %}
